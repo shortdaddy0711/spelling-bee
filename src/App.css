@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -35,4 +35,35 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.word-list1 {
+  display: inline;
+  margin: 10px;
+  width: 10em;
+  height: 3em;
+  align-items: center;
+  font-size: 23px;
+  background-color: aquamarine;
+}
+
+.word-list2 {
+  display: inline;
+  margin: 10px;
+  width: 10em;
+  height: 3em;
+  align-items: center;
+  font-size: 23px;
+  background-color:goldenrod;
+}
+
+.word-list3 {
+  display: inline;
+  margin: 10px;
+  width: 10em;
+  height: 3em;
+  align-items: center;
+  font-size: 23px;
+  background-color:steelblue;
 }
