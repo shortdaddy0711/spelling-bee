@@ -6,8 +6,8 @@ const str2 = `career athlete sighed duo either else afraid billow bison squid ra
 const str3 = `trophy swirled worse repress chose prepare antsy Canada dangerous teeter coveralls tumbling banners plush record slate ruins oncoming tourists splutter inwardly bough glisten opposite activists scarcely mustard runes formation unnoticed chef subtitles lento opus FORTRAN binary treble feta terraced stealthily berth mantle fountain contingent Oregon lurching fester dissuade leachcranky amount sandwich clothes belle percent hover toga pluck chives ponytail cradlehumor bridge drape Mexico flimsy laughter helmet mobility listlessly accuse instrument commute stretcher cruel convince previous agreement crease fragment Scandinavia pedestrian tangents semicolon Baltic proverb Aztec ancestors deference streamlet curtly swerve purpose warden intoxicating profusion wrath`;
 
 const Arr = {
-	"str1" : str1.split(' '),
-	"str2" : str2.split(' '),
-	"str3" : str3.split(' '),
-}
+	str1: str1.split(' '),
+	str2: str2.split(' '),
+	str3: str3.split(' '),
+};
 export default Arr;

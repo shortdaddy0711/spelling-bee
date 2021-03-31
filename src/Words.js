@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import Arr from './wordlist.js';
 import './App.css';
-import ReactTooltip from 'react-tooltip';
 
 const handleError = (err) => {
 	console.warn(err);
@@ -12,16 +12,12 @@ const handleError = (err) => {
 	);
 };
 
-// const existsFile = (url) => {
-// 	var http = new XMLHttpRequest();
-// 	http.open('HEAD', url, false);
-// 	http.send();
-// 	return http.status !== 404;
-// }
-
-const handleClick = async (e) => {
+const handlePlay = async (e) => {
 	const apiKey = 'bfeb2a4a-ffee-41b8-b569-b9ace72651d6';
-	const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${e.target.innerText}?key=${apiKey}`;
+	console.log(e.target.value);
+	const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${
+		e.target.closest('button').value
+	}?key=${apiKey}`;
 	fetch(url)
 		.then((resp) => {
 			return resp.json();
@@ -30,8 +26,8 @@ const handleClick = async (e) => {
 			const fileName = data[0].hwi.prs[0].sound.audio;
 			const fileUrl = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${fileName[0]}/${fileName}.mp3`;
 			const pronounce = new Audio(fileUrl);
-            if (typeof pronounce.duration === 'number') {
-                pronounce.onloadedmetadata = () => {
+			if (typeof pronounce.duration === 'number') {
+				pronounce.onloadedmetadata = () => {
 					console.log(pronounce.duration);
 				};
 				pronounce.onload = pronounce.play();
@@ -40,74 +36,113 @@ const handleClick = async (e) => {
 		.catch(handleError);
 };
 
+
+const handleSpeech = (e) => {
+	const speech = window.webkitSpeechRecognition;
+
+	const recog = new speech();
+
+	recog.onstart = () => {
+		console.log("voice recognition is on!");
+	}
+
+	recog.onspeechend = () => {
+		recog.stop();
+		console.log("voice recognition is over!")
+	}
+
+	recog.onresult = (e) => {
+		const index = e.resultIndex;
+		const transcript = e.results[index][0].transcript;
+		console.log(transcript);
+	}
+	
+	recog.start();
+}
+
 const Words = () => {
-	const arr1 = [...Arr.str1];
-	const arr2 = [...Arr.str2];
-	const arr3 = [...Arr.str3];
+	const arr1 = [...Arr.str1]
+		.sort(() => Math.random() - Math.random())
+		.slice(0, 20);
+	const arr2 = [...Arr.str2]
+		.sort(() => Math.random() - Math.random())
+		.slice(0, 20);
+	const arr3 = [...Arr.str3]
+		.sort(() => Math.random() - Math.random())
+		.slice(0, 20);
+
+	const [level, setLevel] = useState(1);
+
 	return (
 		<>
-			<div>
-				{arr1.map((word) => (
-					<button
-						data-tip
-						data-for={word}
-						onClick={handleClick}
-						className='word-list1'
-					>
-						{word}
-					</button>
-				))}
+			<div className='header'>
+				<div className='logo'>
+					<i class='fas fa-frog'></i>
+				</div>
+				<button className='btn-level' onClick={() => setLevel(1)}>
+					Level1
+				</button>
+				<button className='btn-level' onClick={() => setLevel(2)}>
+					Level2
+				</button>
+				<button className='btn-level' onClick={() => setLevel(3)}>
+					Level3
+				</button>
 			</div>
 			<div>
-				{arr2.map((word) => (
-					<button
-						data-tip
-						data-for='shortDef'
-						onClick={handleClick}
-						className='word-list2'
-					>
-						{word}
-					</button>
-				))}
+				<div className='container'>
+					{level === 1
+						? arr1.map((word) => (
+								<div className='word-list1'>
+									<div className='word-element' key={word}>
+										{word}
+									</div>
+									<button
+										className='btn-show'
+										onClick={handlePlay}
+										value={word}
+									>
+										<i class='fas fa-play'></i>
+									</button>
+									<button
+										className='btn-show'
+										onClick={handleSpeech}
+									>
+										<i class='fas fa-microphone-alt'></i>
+									</button>
+								</div>
+						  ))
+						: ''}
+				</div>
+				{/* <div>
+					{level === 2
+						? arr2.map((word) => (
+								<button
+									onClick={handleClick}
+									className='word-list2'
+									key={word}
+								>
+									{word}
+								</button>
+						  ))
+						: ''}
+				</div>
+				<div>
+					{level === 3
+						? arr3.map((word) => (
+								<button
+									onClick={handleClick}
+									className='word-list3'
+									key={word}
+								>
+									{word}
+								</button>
+						  ))
+						: ''}
+				</div> */}
 			</div>
-			<div>
-				{arr3.map((word) => (
-					<button
-						data-tip
-						data-for='shortDef'
-						onClick={handleClick}
-						className='word-list3'
-					>
-						{word}
-					</button>
-				))}
-			</div>
-			<ReactTooltip id='shortDef' place='top' effect='solid'>
-				tooltip test
-			</ReactTooltip>
 		</>
 	);
 };
 
 export default Words;
-
-// fetch(
-// 	'https://ssl.gstatic.com/dictionary/static/sounds/20200429/patrol--_us_1.mp3',
-// 	{
-// 		headers: {
-// 			accept: '*/*',
-// 			'accept-language': 'en-US,en;q=0.9',
-// 			range: 'bytes=0-',
-// 			'sec-fetch-dest': 'audio',
-// 			'sec-fetch-mode': 'no-cors',
-// 			'sec-fetch-site': 'cross-site',
-// 			'sec-gpc': '1',
-// 		},
-// 		referrer: 'http://localhost:3000/',
-// 		referrerPolicy: 'strict-origin-when-cross-origin',
-// 		body: null,
-// 		method: 'GET',
-// 		mode: 'cors',
-// 		credentials: 'omit',
-// 	}
-// );
