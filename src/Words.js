@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { diffChars } from 'diff';
 import Arr from './wordlist.js';
 import './App.css';
 
@@ -36,110 +37,115 @@ const handlePlay = async (e) => {
 		.catch(handleError);
 };
 
-
-const handleSpeech = (e) => {
+const handleSpeech = (event) => {
 	const speech = window.webkitSpeechRecognition;
 
 	const recog = new speech();
 
 	recog.onstart = () => {
-		console.log("voice recognition is on!");
-	}
+		console.log('voice recognition is on!');
+	};
 
 	recog.onspeechend = () => {
 		recog.stop();
-		console.log("voice recognition is over!")
-	}
+		console.log('voice recognition is over!');
+	};
 
 	recog.onresult = (e) => {
 		const index = e.resultIndex;
-		const transcript = e.results[index][0].transcript;
-		console.log(transcript);
-	}
-	
+		const transcript = e.results[index][0].transcript
+			.split(' ')
+			.join('')
+			.toLowerCase();
+		const word = event.target.closest('button').value;
+		console.log(word, ' : ', transcript);
+		const diff = diffChars(word, transcript, true);
+		let result = [];
+		diff.forEach((part) => {
+			// green for additions, red for deletions
+			// grey for common parts
+			result.push(
+				part.added
+					? `+${part.value}`
+					: part.removed
+					? `-${part.value}`
+					: ''
+			);
+		});
+		console.log(result);
+
+		console.log(diff);
+		// console.log(transcript);
+		return;
+	};
+
 	recog.start();
-}
+};
 
 const Words = () => {
-	const arr1 = [...Arr.str1]
-		.sort(() => Math.random() - Math.random())
-		.slice(0, 20);
-	const arr2 = [...Arr.str2]
-		.sort(() => Math.random() - Math.random())
-		.slice(0, 20);
-	const arr3 = [...Arr.str3]
+
+	const [level, setLevel] = useState('level1');
+
+	let words = Arr[level]
 		.sort(() => Math.random() - Math.random())
 		.slice(0, 20);
 
-	const [level, setLevel] = useState(1);
+	// useEffect(() => {
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// 	words = Arr[level]
+	// 		.sort(() => Math.random() - Math.random())
+	// 		.slice(0, 20);
+	// 	console.log(words);
+	// });
 
 	return (
 		<>
 			<div className='header'>
 				<div className='logo'>
-					<i class='fas fa-frog'></i>
+					<i className='fas fa-frog'></i>
 				</div>
-				<button className='btn-level' onClick={() => setLevel(1)}>
+				<button
+					className='btn-level'
+					onClick={() => setLevel('level1')}
+				>
 					Level1
 				</button>
-				<button className='btn-level' onClick={() => setLevel(2)}>
+				<button
+					className='btn-level'
+					onClick={() => setLevel('level2')}
+				>
 					Level2
 				</button>
-				<button className='btn-level' onClick={() => setLevel(3)}>
+				<button
+					className='btn-level'
+					onClick={() => setLevel('level3')}
+				>
 					Level3
 				</button>
 			</div>
+			<div className='container'>
+				{words.map((word) => (
+					<div className={level} key={word}>
+						<div className='word-element'>{word}</div>
+						<button
+							className='btn-control'
+							onClick={handlePlay}
+							value={word}
+						>
+							<i className='fas fa-play'></i>
+						</button>
+						<button
+							className='btn-control'
+							onClick={handleSpeech}
+							value={word}
+						>
+							<i className='fas fa-microphone-alt'></i>
+						</button>
+					</div>
+				))}
+			</div>
 			<div>
-				<div className='container'>
-					{level === 1
-						? arr1.map((word) => (
-								<div className='word-list1'>
-									<div className='word-element' key={word}>
-										{word}
-									</div>
-									<button
-										className='btn-show'
-										onClick={handlePlay}
-										value={word}
-									>
-										<i class='fas fa-play'></i>
-									</button>
-									<button
-										className='btn-show'
-										onClick={handleSpeech}
-									>
-										<i class='fas fa-microphone-alt'></i>
-									</button>
-								</div>
-						  ))
-						: ''}
-				</div>
-				{/* <div>
-					{level === 2
-						? arr2.map((word) => (
-								<button
-									onClick={handleClick}
-									className='word-list2'
-									key={word}
-								>
-									{word}
-								</button>
-						  ))
-						: ''}
-				</div>
-				<div>
-					{level === 3
-						? arr3.map((word) => (
-								<button
-									onClick={handleClick}
-									className='word-list3'
-									key={word}
-								>
-									{word}
-								</button>
-						  ))
-						: ''}
-				</div> */}
+				{}
 			</div>
 		</>
 	);
