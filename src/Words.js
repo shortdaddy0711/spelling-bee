@@ -86,11 +86,11 @@ const Words = () => {
 			const word = event.target.closest('button').value;
 			console.log(word, ' : ', transcript);
 			const diff = diffChars(word, transcript, true);
-			let result = [];
+			let results = [];
 			diff.forEach((part) => {
 				// green for additions, red for deletions
 				// grey for common parts
-				result.push(
+				results.push(
 					part.added
 						? `+${part.value}`
 						: part.removed
@@ -98,17 +98,45 @@ const Words = () => {
 						: ''
 				);
 			});
-			console.log(result);
+			let reportArr = [];
+			let report = document.createElement('P');
+			let text = '';
+			results.forEach((r) => {
+				if (r !== '') {
+					reportArr.push(r);
+				}
+			});
+			if (reportArr.length === 0) {
+				console.log(reportArr);
+				text = 'Correct!!';
+			} else {
+				text = reportArr.join(', ');
+			}
+			const t = document.createTextNode(text);
+			report.appendChild(t);
+			document.getElementById('result').appendChild(report);
 		};
 		recog.start();
+	};
+
+	const scrollToLeft = () => {
+		document.getElementById('container').scrollLeft -= 320;
+	};
+
+	const scrollToRight = () => {
+		document.getElementById('container').scrollLeft += 320;
+	};
+
+	const scrollToStart = () => {
+		document.getElementById('container').scrollLeft -= 10000;
 	};
 
 	useEffect(() => {
 		console.log(current);
 		return () => {
 			console.log();
-		}
-	}, [current])
+		};
+	}, [current]);
 
 	return (
 		<div className='body'>
@@ -120,6 +148,7 @@ const Words = () => {
 					className='btn-level'
 					onClick={() => {
 						setLevel('level1');
+						scrollToStart();
 						handleWords();
 					}}
 				>
@@ -129,6 +158,7 @@ const Words = () => {
 					className='btn-level'
 					onClick={() => {
 						setLevel('level2');
+						scrollToStart();
 						handleWords();
 					}}
 				>
@@ -138,18 +168,21 @@ const Words = () => {
 					className='btn-level'
 					onClick={() => {
 						setLevel('level3');
+						scrollToStart();
 						handleWords();
 					}}
 				>
 					4th Grade 2
 				</button>
 			</div>
-			<div className='container'>
+			<div className='container' id='container'>
 				{words.map((word, i) => (
 					<div className={level} key={i}>
 						<div className='word-question-number'>Q.{i + 1}</div>
 						<div className='word-element'>
 							{showWords[word] ? word : '?'}
+						</div>
+						<div className='word-result' id='result'>
 						</div>
 						<div className='btn-control'>
 							<button
@@ -167,13 +200,25 @@ const Words = () => {
 								<i className='fas fa-microphone-alt'></i>
 							</button>
 						</div>
-						<div>
+						<div className='btn-nav'>
+							<button
+								className='btn-nav-left'
+								onClick={scrollToLeft}
+							>
+								<i className='fas fa-chevron-left'></i>
+							</button>
 							<button
 								className='btn-show-word'
 								onClick={handleShow}
 								value={word}
 							>
 								Show word
+							</button>
+							<button
+								className='btn-nav-right'
+								onClick={scrollToRight}
+							>
+								<i className='fas fa-chevron-right'></i>
 							</button>
 						</div>
 					</div>
