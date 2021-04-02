@@ -4,14 +4,14 @@ import Arr from './wordlist.js';
 import './App.css';
 
 const Words = () => {
-	const [level, setLevel] = useState('level1');
+	const [level, setLevel] = useState('');
 	const [words, setWords] = useState([]);
 	const [showWords, setShowWords] = useState({});
 	const [current, setCurrent] = useState('');
 
-	const handleWords = () => {
+	const handleWords = (str) => {
 		let wordsObj = {};
-		let randWords = Arr[level]
+		let randWords = Arr[str]
 			.sort(() => Math.random() - Math.random())
 			.slice(0, 20);
 		randWords.forEach((word) => {
@@ -89,6 +89,11 @@ const Words = () => {
 		recog.onspeechend = () => {
 			recog.stop();
 			console.log('voice recognition is over!');
+			const wordsObj = showWords;
+			wordsObj[word] = true;
+			console.log(wordsObj);
+			setShowWords(wordsObj);
+			setCurrent(word);
 		};
 
 		recog.onresult = (e) => {
@@ -99,14 +104,14 @@ const Words = () => {
 				.toLowerCase();
 			console.log(word, ' : ', transcript);
 			const diff = diffChars(word, transcript, true);
-			let results = [];
+			let results = document.createElement('p');
 			diff.forEach((part) => {
 				results.push(
 					part.added
-						? `+${part.value}`
+						? `<{part.value}`
 						: part.removed
 						? `-${part.value}`
-						: ''
+						: part.value
 				);
 			});
 			let reportArr = [];
@@ -120,13 +125,10 @@ const Words = () => {
 			let result = document.getElementById(`${level}-${word}`);
 			if (reportArr.length === 0) {
 				console.log(reportArr);
-				result.textContent = '👍👍👍👍';
+				result.innerHTML = '<div>👍👍👍👍</div>';
 			} else {
 				result.textContent = reportArr.join(', ');
 			}
-
-
-
 		};
 		recog.start();
 	};
@@ -140,7 +142,7 @@ const Words = () => {
 	};
 
 	const scrollToStart = () => {
-		document.getElementById('container').scrollLeft -= 10000;
+		document.getElementById('container').scrollLeft -= 7000;
 	};
 
 	useEffect(() => {
@@ -157,33 +159,39 @@ const Words = () => {
 					<i className='fas fa-frog'></i>
 				</div>
 				<button
-					className='btn-level'
+					className={
+						level === 'level1' ? 'btn-level-selected' : 'btn-level'
+					}
 					onClick={() => {
 						setLevel('level1');
 						scrollToStart();
-						handleWords();
+						handleWords('level1');
 						cleanResult();
 					}}
 				>
 					3rd Grade
 				</button>
 				<button
-					className='btn-level'
+					className={
+						level === 'level2' ? 'btn-level-selected' : 'btn-level'
+					}
 					onClick={() => {
 						setLevel('level2');
 						scrollToStart();
-						handleWords();
+						handleWords('level2');
 						cleanResult();
 					}}
 				>
 					4th Grade 1
 				</button>
 				<button
-					className='btn-level'
+					className={
+						level === 'level3' ? 'btn-level-selected' : 'btn-level'
+					}
 					onClick={() => {
 						setLevel('level3');
 						scrollToStart();
-						handleWords();
+						handleWords('level3');
 						cleanResult();
 					}}
 				>
