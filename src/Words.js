@@ -21,6 +21,15 @@ const Words = () => {
 		setShowWords(wordsObj);
 	};
 
+	const cleanResult = () => {
+		words.forEach((word) => {
+			let remove = document.getElementById(`${level}-${word}`);
+			if (remove) {
+				remove.textContent = '';
+			}
+		});
+	};
+
 	const handleShow = (e) => {
 		const key = e.target.value;
 		const wordsObj = showWords;
@@ -64,6 +73,11 @@ const Words = () => {
 	};
 
 	const handleSpeech = (event) => {
+		const word = event.target.closest('button').value;
+		// if (word !== current) {
+		// 	alert('Listen word first!');
+		// 	return;
+		// }
 		const speech = window.webkitSpeechRecognition;
 
 		const recog = new speech();
@@ -83,13 +97,10 @@ const Words = () => {
 				.split(' ')
 				.join('')
 				.toLowerCase();
-			const word = event.target.closest('button').value;
 			console.log(word, ' : ', transcript);
 			const diff = diffChars(word, transcript, true);
 			let results = [];
 			diff.forEach((part) => {
-				// green for additions, red for deletions
-				// grey for common parts
 				results.push(
 					part.added
 						? `+${part.value}`
@@ -99,22 +110,23 @@ const Words = () => {
 				);
 			});
 			let reportArr = [];
-			let report = document.createElement('P');
-			let text = '';
 			results.forEach((r) => {
 				if (r !== '') {
 					reportArr.push(r);
 				}
 			});
+			let id = `${level}-${word}`;
+			console.log(id);
+			let result = document.getElementById(`${level}-${word}`);
 			if (reportArr.length === 0) {
 				console.log(reportArr);
-				text = 'Correct!!';
+				result.textContent = '👍👍👍👍';
 			} else {
-				text = reportArr.join(', ');
+				result.textContent = reportArr.join(', ');
 			}
-			const t = document.createTextNode(text);
-			report.appendChild(t);
-			document.getElementById('result').appendChild(report);
+
+
+
 		};
 		recog.start();
 	};
@@ -150,6 +162,7 @@ const Words = () => {
 						setLevel('level1');
 						scrollToStart();
 						handleWords();
+						cleanResult();
 					}}
 				>
 					3rd Grade
@@ -160,6 +173,7 @@ const Words = () => {
 						setLevel('level2');
 						scrollToStart();
 						handleWords();
+						cleanResult();
 					}}
 				>
 					4th Grade 1
@@ -170,6 +184,7 @@ const Words = () => {
 						setLevel('level3');
 						scrollToStart();
 						handleWords();
+						cleanResult();
 					}}
 				>
 					4th Grade 2
@@ -182,8 +197,10 @@ const Words = () => {
 						<div className='word-element'>
 							{showWords[word] ? word : '?'}
 						</div>
-						<div className='word-result' id='result'>
-						</div>
+						<div
+							className='word-result'
+							id={`${level}-${word}`}
+						></div>
 						<div className='btn-control'>
 							<button
 								className='btn-play'
@@ -224,7 +241,17 @@ const Words = () => {
 					</div>
 				))}
 			</div>
-			<div>{}</div>
+			<div>
+				<h3>Instruction</h3>
+				<ol>
+					<li>Play sound by push play button</li>
+					<li>Record your answer by push Microphone button</li>
+					<li>
+						if you want to see the word before answer, click the
+						'Show word' button
+					</li>
+				</ol>
+			</div>
 		</div>
 	);
 };
