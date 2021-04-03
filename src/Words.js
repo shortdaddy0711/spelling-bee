@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createElement } from 'react';
+import React, { useState, useEffect } from 'react';
 import { diffChars } from 'diff';
 import Arr from './wordlist.js';
 import './App.css';
@@ -79,7 +79,7 @@ const Words = () => {
 	}
 
 	const handleSpeech = (event) => {
-		const word = event.target.closest('button').value;
+		const word = event.target.closest('button').value.toLowerCase();
 		// if (word !== current) {
 		// 	alert('Listen word first!');
 		// 	return;
