@@ -1,3 +1,13 @@
+# `Warning! This application is developed using Web Speech API`
+
+**Note: This application only works with Chrome browser**
+
+This Google's experimental features only works with Chrome browser. If you want to test this application, I recommend to use Chrome browser(exclude mobile Chrome browser) for the full feature.
+
+......................................................................
+
+......................................................................
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
