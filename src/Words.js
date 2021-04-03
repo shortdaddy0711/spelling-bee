@@ -76,7 +76,7 @@ const Words = () => {
 		const fileUrl = `audio/${fileName}.mp3`;
 		const sound = new Audio(fileUrl);
 		sound.play();
-	}
+	};
 
 	const handleSpeech = (event) => {
 		const word = event.target.closest('button').value.toLowerCase();
@@ -278,13 +278,15 @@ const Words = () => {
 			<div className='instruction'>
 				<h3>Instruction</h3>
 				<ol>
-					<li>Play sound by push play button</li>
-					<li>Record your answer by push Microphone button</li>
+					<li>Choose your level</li>
+					<li>Listen pronounce by push play button</li>
+					<li>Speak each letter after push microphone button</li>
+					<li>You will see the result after you finished speak</li>
+					<li>Use the result to fix your error and try again</li>
 					<li>
 						if you want to see the word before answer, click the
 						'Show word' button
 					</li>
-					<li>Use the result to fix your error</li>
 				</ol>
 			</div>
 		</div>

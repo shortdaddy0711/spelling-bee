@@ -219,7 +219,7 @@ button:hover {
 	display: inline-flex;
 	flex-direction: row;
 	justify-content:space-around;
-	font-size: .7em;
+	font-size: .8em;
 	min-width: 260px;
 }
 
