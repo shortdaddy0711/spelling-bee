@@ -72,6 +72,12 @@ const Words = () => {
 			.catch(handleError);
 	};
 
+	const correct = (fileName) => {
+		const fileUrl = `audio/${fileName}.mp3`;
+		const sound = new Audio(fileUrl);
+		sound.play();
+	}
+
 	const handleSpeech = (event) => {
 		const word = event.target.closest('button').value;
 		// if (word !== current) {
@@ -123,12 +129,14 @@ const Words = () => {
 			testDiv.appendChild(fragment);
 			console.log(testDiv.innerHTML.includes('red' || 'green'));
 			if (testDiv.innerHTML.includes('red' || 'green')) {
+				correct('no');
 				if (display.firstChild) {
 					display.replaceChild(testDiv, display.firstChild);
 				} else {
 					display.appendChild(testDiv);
 				}
 			} else {
+				correct('yes');
 				display.innerHTML = '<div>👍👍👍👍</div>';
 			}
 		};
