@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 50vw;
+  min-width: 330px;
+  max-width: 330px;
 }
 
 code {

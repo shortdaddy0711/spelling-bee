@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createElement } from 'react';
 import { diffChars } from 'diff';
 import Arr from './wordlist.js';
 import './App.css';
@@ -103,31 +103,33 @@ const Words = () => {
 				.join('')
 				.toLowerCase();
 			console.log(word, ' : ', transcript);
+
+			let span = null;
 			const diff = diffChars(word, transcript, true);
-			let results = document.createElement('p');
+			const display = document.getElementById(`${level}-${word}`);
+			const fragment = document.createDocumentFragment();
 			diff.forEach((part) => {
-				results.push(
-					part.added
-						? `<{part.value}`
-						: part.removed
-						? `-${part.value}`
-						: part.value
-				);
+				const color = part.added
+					? 'green'
+					: part.removed
+					? 'red'
+					: 'grey';
+				span = document.createElement('span');
+				span.style.color = color;
+				span.appendChild(document.createTextNode(part.value));
+				fragment.appendChild(span);
 			});
-			let reportArr = [];
-			results.forEach((r) => {
-				if (r !== '') {
-					reportArr.push(r);
+			const testDiv = document.createElement('div');
+			testDiv.appendChild(fragment);
+			console.log(testDiv.innerHTML.includes('red' || 'green'));
+			if (testDiv.innerHTML.includes('red' || 'green')) {
+				if (display.firstChild) {
+					display.replaceChild(testDiv, display.firstChild);
+				} else {
+					display.appendChild(testDiv);
 				}
-			});
-			let id = `${level}-${word}`;
-			console.log(id);
-			let result = document.getElementById(`${level}-${word}`);
-			if (reportArr.length === 0) {
-				console.log(reportArr);
-				result.innerHTML = '<div>👍👍👍👍</div>';
 			} else {
-				result.textContent = reportArr.join(', ');
+				display.innerHTML = '<div>👍👍👍👍</div>';
 			}
 		};
 		recog.start();
@@ -209,6 +211,22 @@ const Words = () => {
 							className='word-result'
 							id={`${level}-${word}`}
 						></div>
+						<div className='result-notice'>
+							<div>
+								<i
+									className='fas fa-circle'
+									style={{ color: 'green' }}
+								></i>
+								Unnecessary letters
+							</div>
+							<div>
+								<i
+									className='fas fa-circle'
+									style={{ color: 'red' }}
+								></i>
+								Missing letters
+							</div>
+						</div>
 						<div className='btn-control'>
 							<button
 								className='btn-play'
@@ -249,7 +267,7 @@ const Words = () => {
 					</div>
 				))}
 			</div>
-			<div>
+			<div className='instruction'>
 				<h3>Instruction</h3>
 				<ol>
 					<li>Play sound by push play button</li>
@@ -258,6 +276,7 @@ const Words = () => {
 						if you want to see the word before answer, click the
 						'Show word' button
 					</li>
+					<li>Use the result to fix your error</li>
 				</ol>
 			</div>
 		</div>
