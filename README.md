@@ -1,12 +1,12 @@
-# `Warning! This application is developed using Web Speech API`
+# `Warning! This application only works with Chrome browser`
 
-**Note: This application only works with Chrome browser**
+**Note: This application using Web Speech API**
 
-This Google's experimental features only works with Chrome browser. If you want to test this application, I recommend to use Chrome browser(exclude mobile Chrome browser) for the full feature.
+This Google's experimental features only works with Chrome browser. If you want to test this application, I recommend to use Chrome browser(for PC, MACOS, ChromeOS, Linux, android) for the full feature.
 
-......................................................................
+.............................................................................
 
-......................................................................
+.............................................................................
 
 # Getting Started with Create React App
 
