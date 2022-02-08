@@ -1,239 +1,263 @@
 .body {
-	border-style: solid;
-	border-color: transparent;
-	box-sizing: border-box;
-	display: block;
-	outline: none;
+  border-style: solid;
+  border-color: transparent;
+  box-sizing: border-box;
+  display: block;
+  outline: none;
 }
 
 .container {
-	max-width: 330px;
-	max-height: 500px;
-	/* width: max-content; */
-	/* height: max-content; */
-	transform: translateX(0%);
-	transition: transform 0.7s ease-in-out;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: center;
-	overflow-x: hidden;
-	scroll-behavior: smooth;
-	position: relative;
-	flex: 0 0 100%;
+  width: 380px;
+  max-height: 500px;
+  transform: translateX(0%);
+  transition: transform 0.7s ease-in-out;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  position: relative;
+  flex: 0 0 100%;
 }
 
 .header {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .level1 {
-	display: inline-flex;
-	flex-direction: column;
-	margin: 1em;
-	width: 15em;
-	height: 19em;
-	background-color: rgb(165, 197, 186);
-	border-radius: 20px;
-	padding: 1.5em;
-	align-items: center;
-	justify-content: space-between;
+  display: inline-flex;
+  flex-direction: column;
+  margin: 1em;
+  width: 18em;
+  height: 19em;
+  background-color: rgb(165, 197, 186);
+  border-radius: 20px;
+  padding: 1.5em;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .level2 {
-	display: inline-flex;
-	flex-direction: column;
-	margin: 1em;
-	width: 15em;
-	height: 19em;
-	background-color: rgb(211, 180, 104);
-	border-radius: 20px;
-	padding: 1.5em;
-	align-items: center;
-	justify-content: space-between;
+  display: inline-flex;
+  flex-direction: column;
+  margin: 1em;
+  width: 18em;
+  height: 19em;
+  background-color: rgb(211, 180, 104);
+  border-radius: 20px;
+  padding: 1.5em;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .level3 {
-	display: inline-flex;
-	flex-direction: column;
-	margin: 1em;
-	width: 15em;
-	height: 19em;
-	background-color: rgb(130, 160, 185);
-	border-radius: 20px;
-	padding: 1.5em;
-	align-items: center;
-	justify-content: space-between;
+  display: inline-flex;
+  flex-direction: column;
+  margin: 1em;
+  width: 18em;
+  height: 19em;
+  background-color: rgb(130, 160, 185);
+  border-radius: 20px;
+  padding: 1.5em;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.level4 {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 1em;
+  width: 18em;
+  height: 19em;
+  background-color: rgb(130, 160, 45);
+  border-radius: 20px;
+  padding: 1.5em;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.level5 {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 1em;
+  width: 18em;
+  height: 19em;
+  background-color: rgb(233, 160, 185);
+  border-radius: 20px;
+  padding: 1.5em;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
-	margin: 10px;
-	font-size: 3em;
-	/* background-color: rgb(177, 156, 148); */
-	border-radius: 10px;
-	border-width: 0;
-	text-align: center;
-	color: forestgreen;
+  margin: 10px;
+  font-size: 3em;
+  /* background-color: rgb(177, 156, 148); */
+  border-radius: 10px;
+  border-width: 0;
+  text-align: center;
+  color: forestgreen;
 }
 
 .word-element {
-	font-size: 2em;
-	color: #252522;
-	text-align: center;
-	background-color: antiquewhite;
-	width: 100%;
-	height: 1.5em;
-	border-radius: 8px;
+  font-size: 2em;
+  color: #252522;
+  text-align: center;
+  background-color: antiquewhite;
+  width: 100%;
+  height: 1.5em;
+  border-radius: 8px;
 }
 
 .word-result {
-	font-size: 2em;
-	color: #646855;
-	text-align: center;
-	background-color: antiquewhite;
-	width: 100%;
-	height: 1.5em;
-	border-radius: 8px;
+  font-size: 2em;
+  color: #646855;
+  text-align: center;
+  background-color: antiquewhite;
+  width: 100%;
+  height: 1.5em;
+  border-radius: 8px;
 }
 
 button:active {
-	outline: none;
-	border: none;
+  outline: none;
+  border: none;
 }
 
 button:focus {
-	outline: 0;
+  outline: 0;
 }
 
 button:hover {
-	cursor: pointer;
-	color: dimgray;
+  cursor: pointer;
+  color: dimgray;
 }
 
 .word-question-number {
-	font-size: 2em;
-	color: greenyellow;
-	border-bottom: 3px solid rgb(110, 141, 88);
+  font-size: 2em;
+  color: greenyellow;
+  border-bottom: 3px solid rgb(110, 141, 88);
 }
 
 .btn-level {
-	margin: 3px;
-	width: 5em;
-	height: 3em;
-	font-size: 0.9em;
-	background-color: rgb(177, 156, 148);
-	border-radius: 10px;
-	border: none;
-	text-align: center;
-	color: antiquewhite;
+  margin: 3px;
+  width: 5em;
+  height: 3em;
+  font-size: 0.9em;
+  background-color: rgb(177, 156, 148);
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+  color: antiquewhite;
 }
 
 .btn-level-selected {
-	background-color: coral;
-	margin: 3px;
-	width: 5em;
-	height: 3em;
-	font-size: 0.9em;
-	border-radius: 10px;
-	border: none;
-	text-align: center;
+  background-color: coral;
+  margin: 3px;
+  width: 5em;
+  height: 3em;
+  font-size: 0.9em;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
 }
 
 .btn-control {
-	font-size: 2.5em;
-	background: none;
-	border: none;
-	text-align: center;
-	color: rgb(43, 94, 74);
-	max-width: 300px;
-	min-width: 300px;
+  font-size: 2.5em;
+  background: none;
+  border: none;
+  text-align: center;
+  color: rgb(43, 94, 74);
+  max-width: 300px;
+  min-width: 300px;
 }
 
 .btn-play {
-	font-size: 1em;
-	background: none;
-	border: none;
-	text-align: center;
-	color: rgb(43, 94, 74);
-	/* border: 1px solid #1d1d1d; */
-	width: 2.5em;
+  font-size: 1em;
+  background: none;
+  border: none;
+  text-align: center;
+  color: rgb(43, 94, 74);
+  /* border: 1px solid #1d1d1d; */
+  width: 2.5em;
 }
 
 .btn-recog {
-	font-size: 1em;
-	background: none;
-	border: none;
-	text-align: center;
-	color: rgb(43, 94, 74);
-	/* border: 1px solid #1d1d1d; */
-	width: 2.5em;
+  font-size: 1em;
+  background: none;
+  border: none;
+  text-align: center;
+  color: rgb(43, 94, 74);
+  /* border: 1px solid #1d1d1d; */
+  width: 2.5em;
 }
 
 .btn-nav {
-	display: inline-flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-around;
-	background: none;
-	border: none;
-	min-width: 250px;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background: none;
+  border: none;
+  min-width: 250px;
 }
 
 .btn-show-word {
-	font-size: 1.4em;
-	background-color: rgb(130, 155, 140);
-	border: none;
-	border-radius: 7px;
-	text-align: center;
-	color: rgb(228, 231, 211);
-	padding: 0.3em;
-	width: 6em;
+  font-size: 1.4em;
+  background-color: rgb(130, 155, 140);
+  border: none;
+  border-radius: 7px;
+  text-align: center;
+  color: rgb(228, 231, 211);
+  padding: 0.3em;
+  width: 6em;
 }
 
 .btn-nav-left {
-	font-size: 2em;
-	background: none;
-	border: none;
-	border-radius: 7px;
-	text-align: center;
-	color: rgb(228, 231, 211);
-	/* padding: 0.3em; */
-	width: 1em;
+  font-size: 2em;
+  background: none;
+  border: none;
+  border-radius: 7px;
+  text-align: center;
+  color: rgb(228, 231, 211);
+  /* padding: 0.3em; */
+  width: 1em;
 }
 
 .btn-nav-right {
-	font-size: 2em;
-	background: none;
-	border: none;
-	border-radius: 7px;
-	text-align: center;
-	color: rgb(228, 231, 211);
-	/* padding: 0.3em; */
-	width: 1em;
+  font-size: 2em;
+  background: none;
+  border: none;
+  border-radius: 7px;
+  text-align: center;
+  color: rgb(228, 231, 211);
+  /* padding: 0.3em; */
+  width: 1em;
 }
 
 .result-notice {
-	display: inline-flex;
-	flex-direction: row;
-	justify-content:space-around;
-	font-size: .8em;
-	min-width: 260px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 0.8em;
+  min-width: 260px;
 }
 
 .instruction {
-	min-width: 240px;
-	display: inline-flex;
-	flex-direction: column;
-	align-items:flex-start;
-	max-width: 240px;
-	min-height: 160px;
-	padding: 0 24px;
-	background-color: rgb(163, 206, 206);
-	border-radius: 20px;
-	color: rgb(63, 61, 61);
-	margin-left: 16px;
-	margin-right: 16px;
+  width: 18em;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* max-width: 240px; */
+  min-height: 160px;
+  padding: 0 24px;
+  background-color: rgb(163, 206, 206);
+  border-radius: 20px;
+  color: rgb(63, 61, 61);
+  margin-left: 16px;
+  margin-right: 16px;
 }

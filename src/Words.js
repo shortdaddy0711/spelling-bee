@@ -144,11 +144,11 @@ const Words = () => {
 	};
 
 	const scrollToLeft = () => {
-		document.getElementById('container').scrollLeft -= 320;
+		document.getElementById('container').scrollLeft -= 368;
 	};
 
 	const scrollToRight = () => {
-		document.getElementById('container').scrollLeft += 320;
+		document.getElementById('container').scrollLeft += 368;
 	};
 
 	const scrollToStart = () => {
@@ -168,45 +168,21 @@ const Words = () => {
 				<div className='logo'>
 					<i className='fas fa-frog'></i>
 				</div>
-				<button
-					className={
-						level === 'level1' ? 'btn-level-selected' : 'btn-level'
-					}
-					onClick={() => {
-						setLevel('level1');
-						scrollToStart();
-						handleWords('level1');
-						cleanResult();
-					}}
-				>
-					3rd Grade
-				</button>
-				<button
-					className={
-						level === 'level2' ? 'btn-level-selected' : 'btn-level'
-					}
-					onClick={() => {
-						setLevel('level2');
-						scrollToStart();
-						handleWords('level2');
-						cleanResult();
-					}}
-				>
-					4th Grade 1
-				</button>
-				<button
-					className={
-						level === 'level3' ? 'btn-level-selected' : 'btn-level'
-					}
-					onClick={() => {
-						setLevel('level3');
-						scrollToStart();
-						handleWords('level3');
-						cleanResult();
-					}}
-				>
-					4th Grade 2
-				</button>
+				{words && Object.keys(Arr).map((element) => {
+					return (
+            <button
+              className={level === element ? 'btn-level-selected' : 'btn-level'}
+              onClick={() => {
+                setLevel(element);
+                scrollToStart();
+                handleWords(element);
+                cleanResult();
+              }}
+            >
+              {element}
+            </button>
+          );
+				})}
 			</div>
 			<div className='container' id='container'>
 				{words.map((word, i) => (
