@@ -93,6 +93,21 @@
   justify-content: space-between;
 }
 
+.missed {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 1em;
+  width: 18em;
+  height: 19em;
+  background-color: rgb(233, 160, 185);
+  border-radius: 20px;
+  padding: 1.5em;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
 .logo {
   margin: 10px;
   font-size: 3em;
@@ -235,7 +250,6 @@ button:hover {
   border-radius: 7px;
   text-align: center;
   color: rgb(228, 231, 211);
-  /* padding: 0.3em; */
   width: 1em;
 }
 
